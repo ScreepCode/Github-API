@@ -1,4 +1,5 @@
 import requests
+import json
 from requests.structures import CaseInsensitiveDict
 
 
@@ -14,9 +15,9 @@ class ReposAPI(object):
         self.generateAPI()
 
     def generateAPI(self):
-        allPublic = self.getPublicReposFromGitHub()
-        print(len(self.filterReposAfterTopic(allPublic)))
-
+        allPublicRepos = self.getPublicReposFromGitHub()
+        filteredRepos = self.filterReposAfterTopic(allPublicRepos)
+        print(len(filteredRepos))
 
     def getPublicReposFromGitHub(self):
         url = "https://api.github.com/users/"+ USERNAME +"/repos"
@@ -24,14 +25,16 @@ class ReposAPI(object):
         return resp.json()
 
     def filterReposAfterTopic(self, allPublic):
-        filteredRepos = []
         for repo in allPublic:
+            containTopic = False
             if repo["topics"] != None:
                 for topic in repo["topics"]:
                     if topic == TOPIC:
-                        filteredRepos.append(repo)
+                        containTopic = True
+            if containTopic == False:
+                allPublic.remove(repo)
 
-        return filteredRepos
+        return allPublic
 
 
 API = ReposAPI()
