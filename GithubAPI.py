@@ -1,8 +1,7 @@
-import requests
 import json
+
+import requests
 from requests.structures import CaseInsensitiveDict
-
-
 
 USERNAME = "ScreepCode"
 TOPIC = "reference"
@@ -33,6 +32,7 @@ class ReposAPI(object):
                 for topic in repo["topics"]:
                     if topic == TOPIC:
                         containTopic = True
+
             if containTopic == False:
                 allPublic.remove(repo)
 
@@ -46,6 +46,7 @@ class ReposAPI(object):
                repoInfos[key] = repo[key]
             
             allInfos.append(repoInfos)
+        
         return json.loads(json.dumps(allInfos))
 
     def writeToFile(self, infos):
@@ -54,7 +55,3 @@ class ReposAPI(object):
 
 
 API = ReposAPI()
-
-
-
-
