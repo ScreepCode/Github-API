@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Discord-Bot",
+        "html_url": "https://github.com/ScreepCode/Discord-Bot",
+        "description": null,
+        "language": "Java"
+    },
+    {
+        "name": "JSON-Editoren",
+        "html_url": "https://github.com/ScreepCode/JSON-Editoren",
+        "description": null,
+        "language": "Python"
+    },
+    {
+        "name": "Twitch-Bot",
+        "html_url": "https://github.com/ScreepCode/Twitch-Bot",
+        "description": "Twitch Bot",
+        "language": "Python"
+    },
+    {
+        "name": "Webseite_Hommel_Bilder",
+        "html_url": "https://github.com/ScreepCode/Webseite_Hommel_Bilder",
+        "description": null,
+        "language": "HTML"
+    }
+]

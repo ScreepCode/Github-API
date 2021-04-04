@@ -19,6 +19,7 @@ class ReposAPI(object):
         allPublicRepos = self.getPublicReposFromGitHub()
         filteredRepos = self.filterReposAfterTopic(allPublicRepos)
         repoInfos = self.getInfos(filteredRepos)
+        self.writeToFile(repoInfos)
 
     def getPublicReposFromGitHub(self):
         url = "https://api.github.com/users/"+ USERNAME +"/repos"
@@ -37,15 +38,19 @@ class ReposAPI(object):
 
         return allPublic
 
-    def getInfos(self, filteredRepos):
+    def getInfos(self, repos):
         allInfos = []
-        for repo in filteredRepos:
+        for repo in repos:
             repoInfos = {}
             for key in KEYS:
                repoInfos[key] = repo[key]
             
             allInfos.append(repoInfos)
         return json.loads(json.dumps(allInfos))
+
+    def writeToFile(self, infos):
+        with open("githubInfos.json", "w") as file:
+            json.dump(infos, file, indent=4)
 
 
 API = ReposAPI()
