@@ -5,7 +5,7 @@ from requests.structures import CaseInsensitiveDict
 
 USERNAME = "ScreepCode"
 TOPIC = "reference"
-KEYS = ["name", "html_url", "description", "language"]
+KEYS = ["name", "html_url", "description"]
 
 class ReposAPI(object):
     def __init__(self):
@@ -45,7 +45,11 @@ class ReposAPI(object):
             for key in KEYS:
                repoInfos[key] = repo[key]
             
+            repoInfos["languages"] = requests.get("https://api.github.com/repos/screepcode/" + repo["name"] + "/languages", headers=self.headers).json()
             allInfos.append(repoInfos)
+            
+
+            
         
         return json.loads(json.dumps(allInfos))
 
