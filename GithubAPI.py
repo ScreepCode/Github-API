@@ -54,8 +54,17 @@ class ReposAPI(object):
         return json.loads(json.dumps(allInfos))
 
     def writeToFile(self, infos):
-        with open("githubInfos.json", "w") as file:
-            json.dump(infos, file, indent=4)
+        # with open("githubInfosJS.json", "w") as file:
+        #     json.dump(infos, file, indent=4)
+
+        f = open("githubInfosJS.js", "w")
+        out = '\nvar githubRepos = "[" + \n'
+        for x in infos:
+            y = str(x).replace("'", '"')
+            out +=  "        '" + y + ",' + \n"
+        out = out[:-6] + "' + \n"   
+        out += '        "]"'
+        f.write(out)
 
 
 API = ReposAPI()
